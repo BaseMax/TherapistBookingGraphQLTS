@@ -658,6 +658,138 @@ mutation RejectAppointment($appointmentId: ID!, $reason: String!) {
 }
 ```
 
+### AddTherapistToFavorites: Add a therapist to the authenticated user's list of favorite therapists.
+
+```graphql
+mutation AddTherapistToFavorites($therapistId: ID!) {
+  addTherapistToFavorites(therapistId: $therapistId) {
+    id
+    name
+    specialty
+    location
+    available
+  }
+}
+```
+
+### RemoveTherapistFromFavorites: Remove a therapist from the authenticated user's list of favorite therapists.
+
+```graphql
+mutation RemoveTherapistFromFavorites($therapistId: ID!) {
+  removeTherapistFromFavorites(therapistId: $therapistId) {
+    id
+    name
+    specialty
+    location
+    available
+  }
+}
+```
+
+### CreateTherapistReview: Create a new review for a therapist by the authenticated user.
+
+```graphql
+mutation CreateTherapistReview($therapistId: ID!, $rating: Int!, $comment: String) {
+  createTherapistReview(therapistId: $therapistId, rating: $rating, comment: $comment) {
+    id
+    rating
+    comment
+    user {
+      id
+      name
+    }
+  }
+}
+```
+
+### UpdateTherapistReview: Update an existing review given by the authenticated user to a therapist.
+
+```graphql
+mutation UpdateTherapistReview($reviewId: ID!, $rating: Int!, $comment: String) {
+  updateTherapistReview(id: $reviewId, rating: $rating, comment: $comment) {
+    id
+    rating
+    comment
+    user {
+      id
+      name
+    }
+  }
+}
+```
+
+### DeleteTherapistReview: Delete a review given by the authenticated user to a therapist.
+
+```graphql
+mutation DeleteTherapistReview($reviewId: ID!) {
+  deleteTherapistReview(id: $reviewId)
+}
+```
+
+### CreateTherapistAvailability: Add availability slots for a therapist's weekly schedule.
+
+```graphql
+mutation CreateTherapistAvailability($therapistId: ID!, $availability: [AvailabilityInput!]!) {
+  createTherapistAvailability(therapistId: $therapistId, availability: $availability) {
+    id
+    dayOfWeek
+    startTime
+    endTime
+  }
+}
+```
+
+### UpdateTherapistAvailability: Update availability slots for a therapist's weekly schedule.
+
+```graphql
+mutation UpdateTherapistAvailability($availabilityId: ID!, $startTime: String!, $endTime: String!) {
+  updateTherapistAvailability(id: $availabilityId, startTime: $startTime, endTime: $endTime) {
+    id
+    dayOfWeek
+    startTime
+    endTime
+  }
+}
+```
+
+### DeleteTherapistAvailability: Remove availability slots from a therapist's weekly schedule.
+
+```graphql
+mutation DeleteTherapistAvailability($availabilityId: ID!) {
+  deleteTherapistAvailability(id: $availabilityId)
+}
+```
+
+### CreateTherapistSpecialty: Add a new specialty to the therapist's list of expertise.
+
+```graphql
+mutation CreateTherapistSpecialty($name: String!) {
+  createTherapistSpecialty(name: $name) {
+    id
+    name
+  }
+}
+```
+
+### UpdateTherapistSpecialty: Update the name of a therapist's specialty.
+
+```graphql
+mutation UpdateTherapistSpecialty($specialtyId: ID!, $name: String!) {
+  updateTherapistSpecialty(id: $specialtyId, name: $name) {
+    id
+    name
+  }
+}
+```
+
+### DeleteTherapistSpecialty: Remove a specialty from the therapist's list of expertise.
+
+```graphql
+mutation DeleteTherapistSpecialty($specialtyId: ID!) {
+  deleteTherapistSpecialty(id: $specialtyId)
+}
+```
+
 ## Contributing
 
 Contributions to this project are welcome! If you find any issues or want to add new features, please follow the standard GitHub workflow:

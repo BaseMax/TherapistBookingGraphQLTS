@@ -568,6 +568,96 @@ query GetUserTherapistAvailability($date: String!, $time: String!) {
 }
 ```
 
+## GraphQL Mutations
+
+### UpdateUserProfile: Update the details of the authenticated user (e.g., name, email, password).
+
+```graphql
+mutation UpdateUserProfile($input: UserProfileInput!) {
+  updateUserProfile(input: $input) {
+    id
+    name
+    email
+  }
+}
+```
+
+### DeleteUser: Delete the authenticated user's account.
+
+```graphql
+mutation DeleteUser {
+  deleteUser
+}
+```
+
+### CreateTherapist: Add a new therapist to the platform (for admin users).
+
+```graphql
+mutation CreateTherapist($input: TherapistInput!) {
+  createTherapist(input: $input) {
+    id
+    name
+    specialty
+    location
+    available
+  }
+}
+```
+
+### UpdateTherapist: Update the details of a therapist (for admin users).
+
+```graphql
+mutation UpdateTherapist($therapistId: ID!, $input: TherapistInput!) {
+  updateTherapist(id: $therapistId, input: $input) {
+    id
+    name
+    specialty
+    location
+    available
+  }
+}
+```
+
+### DeleteTherapist: Remove a therapist from the platform (for admin users).
+
+```graphql
+mutation DeleteTherapist($therapistId: ID!) {
+  deleteTherapist(id: $therapistId)
+}
+```
+
+### ApproveAppointment: Approve a pending appointment request (for therapists or admin users).
+
+```graphql
+mutation ApproveAppointment($appointmentId: ID!) {
+  approveAppointment(id: $appointmentId) {
+    id
+    therapist {
+      id
+      name
+    }
+    date
+    status
+  }
+}
+```
+
+### RejectAppointment: Reject a pending appointment request (for therapists or admin users).
+
+```graphql
+mutation RejectAppointment($appointmentId: ID!, $reason: String!) {
+  rejectAppointment(id: $appointmentId, reason: $reason) {
+    id
+    therapist {
+      id
+      name
+    }
+    date
+    status
+  }
+}
+```
+
 ## Contributing
 
 Contributions to this project are welcome! If you find any issues or want to add new features, please follow the standard GitHub workflow:

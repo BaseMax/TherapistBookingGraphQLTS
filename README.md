@@ -790,6 +790,136 @@ mutation DeleteTherapistSpecialty($specialtyId: ID!) {
 }
 ```
 
+### CreateAppointmentRequest: Request a therapy appointment with a specific therapist. This mutation allows users to request a booking, which the therapist can then approve or reject.
+
+```graphql
+mutation CreateAppointmentRequest($therapistId: ID!, $date: String!) {
+  createAppointmentRequest(therapistId: $therapistId, date: $date) {
+    id
+    therapist {
+      id
+      name
+    }
+    date
+    status
+  }
+}
+```
+
+### UpdateAppointmentRequest: Update an existing appointment request. This mutation allows users to reschedule or modify the details of their pending appointment request.
+
+```graphql
+mutation UpdateAppointmentRequest($requestId: ID!, $date: String!) {
+  updateAppointmentRequest(id: $requestId, date: $date) {
+    id
+    therapist {
+      id
+      name
+    }
+    date
+    status
+  }
+}
+```
+
+### CancelAppointmentRequest: Cancel a pending appointment request. This mutation allows users to cancel an appointment request before it is approved or rejected by the therapist.
+
+```graphql
+mutation CancelAppointmentRequest($requestId: ID!) {
+  cancelAppointmentRequest(id: $requestId) {
+    id
+    therapist {
+      id
+      name
+    }
+    date
+    status
+  }
+}
+```
+
+### ApproveAppointmentRequest: Approve a pending appointment request as a therapist. This mutation allows therapists to accept a user's appointment request and schedule the session.
+
+```graphql
+mutation ApproveAppointmentRequest($requestId: ID!) {
+  approveAppointmentRequest(id: $requestId) {
+    id
+    therapist {
+      id
+      name
+    }
+    date
+    status
+  }
+}
+```
+
+### RejectAppointmentRequest: Reject a pending appointment request as a therapist. This mutation allows therapists to decline a user's appointment request, providing an optional reason for the rejection.
+
+```graphql
+mutation RejectAppointmentRequest($requestId: ID!, $reason: String) {
+  rejectAppointmentRequest(id: $requestId, reason: $reason) {
+    id
+    therapist {
+      id
+      name
+    }
+    date
+    status
+  }
+}
+```
+
+### UpdateTherapistStatus: Update the availability status of a therapist. This mutation allows therapists to mark their availability as "available" or "unavailable."
+
+```graphql
+mutation UpdateTherapistStatus($available: Boolean!) {
+  updateTherapistStatus(available: $available) {
+    id
+    name
+    specialty
+    location
+    available
+  }
+}
+```
+
+### UpdateTherapistDetails: Update various details of a therapist's profile, such as their name, location, or years of experience.
+
+```graphql
+mutation UpdateTherapistDetails($input: TherapistInput!) {
+  updateTherapistDetails(input: $input) {
+    id
+    name
+    specialty
+    location
+    available
+  }
+}
+```
+
+### CreateTherapistProfile: Create a new therapist profile. This mutation is used by therapists to join the platform and provide their information.
+
+```graphql
+mutation CreateTherapistProfile($input: TherapistInput!) {
+  createTherapistProfile(input: $input) {
+    id
+    name
+    specialty
+    location
+    available
+  }
+}
+```
+
+### DeleteTherapistProfile: Delete a therapist's profile. This mutation allows therapists to leave the platform and remove their profile and associated data.
+
+```graphql
+mutation DeleteTherapistProfile {
+  deleteTherapistProfile
+}
+```
+
 ## Contributing
 
 Contributions to this project are welcome! If you find any issues or want to add new features, please follow the standard GitHub workflow:

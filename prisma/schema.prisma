@@ -11,8 +11,69 @@ datasource db {
 }
 
 model User {
-  id String @id @default(uuid())
-  firstName String 
-  lastName String 
-  
+  id           String @id @default(uuid())
+  firstName    String 
+  lastName     String 
+  username     String 
+  password     String 
+  email        String @unique 
+  roles        Role[] 
+  therapists   Therapist[]
+  reviews      Review[]
+  appointments Appointment[]
+}
+
+model Therapist {
+  id            String @id @default(uuid())
+  firstName     String 
+  location      String 
+  available     Boolean 
+  user          User @relation(fields: [userId], references: [id])
+  userId        String 
+  reviews       Review[]
+  appointments  Appointment[]
+  specialties   Specialty[]
+}
+
+model Specialty {
+  id          String     @id @default(uuid())
+  name        String
+  therapistId String 
+  therapist   Therapist @relation(fields: [therapistId], references: [id])
+}
+
+model Review {
+  id          String     @id @default(uuid())
+  rating      Float
+  comment     String
+  user        User @relation(fields: [userId] , references: [id])
+  userId      String 
+  therapist   Therapist @relation(fields: [therapistId], references: [id])
+  therapistId String 
+}
+
+
+model Appointment {
+  id          String      @id @default(uuid())
+  available   Boolean
+  status      AppointmentStatus[]
+  startTime   DateTime
+  endTime     DateTime
+  user        User     @relation(fields: [userId], references: [id])
+  userId      String
+  therapist   Therapist @relation(fields: [therapistId], references: [id])
+  therapistId String
+}
+
+enum Role {
+  THERAPIST 
+  USER  
+  ADMIN 
+}
+
+enum AppointmentStatus {
+  PENDING
+  CONFIRMED
+  CANCELED
+  COMPLETED
 }

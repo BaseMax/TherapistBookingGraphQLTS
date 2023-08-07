@@ -1,0 +1,49 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type Therapist {
+  """Example field (placeholder)"""
+  exampleField: Int!
+}
+
+type User {
+  """Example field (placeholder)"""
+  exampleField: Int!
+}
+
+type Query {
+  user(id: Int!): User!
+  therapist(id: Int!): Therapist!
+}
+
+type Mutation {
+  createUser(createUserInput: CreateUserInput!): User!
+  updateUser(updateUserInput: UpdateUserInput!): User!
+  removeUser(id: Int!): User!
+  createTherapist(createTherapistInput: CreateTherapistInput!): Therapist!
+  updateTherapist(updateTherapistInput: UpdateTherapistInput!): Therapist!
+  removeTherapist(id: Int!): Therapist!
+}
+
+input CreateUserInput {
+  """Example field (placeholder)"""
+  exampleField: Int!
+}
+
+input UpdateUserInput {
+  """Example field (placeholder)"""
+  exampleField: Int
+  id: Int!
+}
+
+input CreateTherapistInput {
+  """Example field (placeholder)"""
+  exampleField: Int!
+}
+
+input UpdateTherapistInput {
+  """Example field (placeholder)"""
+  exampleField: Int
+  id: Int!
+}

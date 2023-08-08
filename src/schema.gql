@@ -11,8 +11,6 @@ type User {
   id: ID!
   firstName: String!
   lastName: String!
-  password: String!
-  email: String!
   roles: [String!]!
   therapists: [String!]!
   reviews: [String!]!
@@ -20,8 +18,8 @@ type User {
 }
 
 type Auth {
-  """Example field (placeholder)"""
-  exampleField: Int!
+  access_token: String!
+  roles: [String!]!
 }
 
 type Query {
@@ -29,19 +27,16 @@ type Query {
   findAllUsers: [User!]!
   findAllTherapist: [Therapist!]!
   findOneTherapist(id: Int!): Therapist!
-  auth(id: Int!): Auth!
 }
 
 type Mutation {
   createUser(createUserInput: CreateUserInput!): User!
   updateUser(updateUserInput: UpdateUserInput!): User!
-  removeUser(id: ID!): User!
   createTherapist(createTherapistInput: CreateTherapistInput!): Therapist!
   updateTherapist(updateTherapistInput: UpdateTherapistInput!): Therapist!
   removeTherapist(id: Int!): Therapist!
-  createAuth(createAuthInput: CreateAuthInput!): Auth!
-  updateAuth(updateAuthInput: UpdateAuthInput!): Auth!
-  removeAuth(id: Int!): Auth!
+  register(registerInput: RegisterInput!): Auth!
+  login(loginInput: LoginInput!): Auth!
 }
 
 input CreateUserInput {
@@ -49,6 +44,7 @@ input CreateUserInput {
   lastName: String!
   password: String!
   email: String!
+  roles: [String!]!
 }
 
 input UpdateUserInput {
@@ -56,6 +52,7 @@ input UpdateUserInput {
   lastName: String
   password: String
   email: String
+  roles: [String!]
   id: ID!
 }
 
@@ -70,13 +67,14 @@ input UpdateTherapistInput {
   id: Int!
 }
 
-input CreateAuthInput {
-  """Example field (placeholder)"""
-  exampleField: Int!
+input RegisterInput {
+  firstName: String!
+  lastName: String!
+  password: String!
+  email: String!
 }
 
-input UpdateAuthInput {
-  """Example field (placeholder)"""
-  exampleField: Int
-  id: Int!
+input LoginInput {
+  password: String!
+  email: String!
 }

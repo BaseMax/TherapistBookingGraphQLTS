@@ -13,12 +13,12 @@ export class TherapistResolver {
     return this.therapistService.create(createTherapistInput);
   }
 
-  @Query(() => [Therapist], { name: 'therapist' })
+  @Query(() => [Therapist], { name: 'findAllTherapist' })
   findAll() {
     return this.therapistService.findAll();
   }
 
-  @Query(() => Therapist, { name: 'therapist' })
+  @Query(() => Therapist, { name: 'findOneTherapist' })
   findOne(@Args('id', { type: () => Int }) id: number) {
     return this.therapistService.findOne(id);
   }

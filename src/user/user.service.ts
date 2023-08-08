@@ -2,12 +2,15 @@ import {
   BadRequestException, 
   HttpException, 
   Injectable, 
+  InternalServerErrorException, 
   NotFoundException 
 } from '@nestjs/common';
-import { Prisma, User } from '@prisma/client';
+import { Prisma, Role, User } from '@prisma/client';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { CreateUserInput } from './dto/create-user.input';
 import { UpdateUserInput } from './dto/update-user.input';
+import * as bcrypt from 'bcrypt';
+import { LoginInput } from 'src/auth/dto/login.input';
 
 @Injectable()
 export class UserService {
@@ -16,11 +19,11 @@ export class UserService {
   ){}
   
   async create(createUserInput:CreateUserInput):Promise<User>{
-    const {
+    let {
       firstName , 
       lastName , 
       password ,
-      email 
+      email ,
     } = createUserInput ;
     let user:User ; 
     
@@ -30,23 +33,27 @@ export class UserService {
       throw new BadRequestException('user alerdy registerd')
     }
 
-
     try {
-      user = await this.prisma.user.create({data:{
-        firstName , 
-        lastName , 
-        email ,
-        password ,
-      }})
+      password = bcrypt.hashSync(password , 12);
+      email = email.toLocaleLowerCase();
+      
+      user = await this.prisma.user.create({
+        data : {
+          firstName , 
+          lastName , 
+          email , 
+          password , 
+        }
+      })
     } catch (error) {
-      throw new HttpException(error.message , error.status);
+      throw new InternalServerErrorException(error.message) ;
     }
-
+    
     return user ; 
   }
 
   async findAll():Promise<User[]>{
-    return await this.prisma.user.findMany()
+    return await this.prisma.user.findMany() ;
   }
 
   async findOne(where:Prisma.UserWhereInput):Promise<User>{
@@ -57,6 +64,27 @@ export class UserService {
     }
     
     return user ;
+  }
+
+  async findByLogin(loginInput:LoginInput):Promise<User>{
+    const { 
+      email , 
+      password ,
+    } = loginInput ;
+    
+    const user = await this.prisma.user.findUnique({where : {email}});
+
+    if(!user){
+      throw new BadRequestException('The email is invalid')
+    }
+
+    const comparePassword = await bcrypt.compare(password , user.password) ;
+
+    if(!comparePassword){
+      throw new BadRequestException('The password is invalid')
+    }
+
+    return user ; 
   }
 
   async update(id: string , updateUserInput: UpdateUserInput):Promise<boolean>{

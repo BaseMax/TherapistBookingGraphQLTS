@@ -2,6 +2,9 @@ import { ObjectType, Field, Int } from '@nestjs/graphql';
 
 @ObjectType()
 export class Auth {
-  @Field(() => Int, { description: 'Example field (placeholder)' })
-  exampleField: number;
+  @Field(()=>String)
+  access_token : string ;
+
+  @Field(()=>[String])
+  roles : string[] ;
 }

@@ -1,12 +1,15 @@
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { ApolloServerPluginLandingPageGraphQLPlayground } from '@apollo/server-plugin-landing-page-graphql-playground';
-import { Module } from '@nestjs/common';
+import { Module, NotFoundException } from '@nestjs/common';
 import { GraphQLModule } from '@nestjs/graphql';
 import { join } from 'path';
 import { PrismaModule } from './prisma/prisma.module';
 import { ConfigModule } from '@nestjs/config';
 import { TherapistModule } from './therapist/therapist.module';
 import { UserModule } from './user/user.module';
+import { AuthModule } from './auth/auth.module';
+import { GraphQLError } from 'graphql';
+
 
 @Module({
   imports: [
@@ -16,12 +19,12 @@ import { UserModule } from './user/user.module';
       driver : ApolloDriver , 
       autoSchemaFile : join(process.cwd() , "src/schema.gql") , 
       playground : false , 
-      plugins : [ApolloServerPluginLandingPageGraphQLPlayground()]
+      plugins : [ApolloServerPluginLandingPageGraphQLPlayground()] , 
     }),
     PrismaModule,
     UserModule,
-    TherapistModule ,
+    TherapistModule,
+    AuthModule ,
   ],
-  providers: [],
 })
 export class AppModule {}

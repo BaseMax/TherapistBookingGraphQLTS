@@ -9,6 +9,7 @@ import { TherapistModule } from './therapist/therapist.module';
 import { UserModule } from './user/user.module';
 import { AuthModule } from './auth/auth.module';
 import { GraphQLError } from 'graphql';
+import { JwtModule, JwtModuleAsyncOptions } from '@nestjs/jwt';
 
 
 @Module({

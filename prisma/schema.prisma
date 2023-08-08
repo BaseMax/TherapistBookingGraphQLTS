@@ -16,7 +16,7 @@ model User {
   lastName     String 
   password     String 
   email        String @unique 
-  roles        Role[] 
+  roles        Role[] @default([USER])
   therapists   Therapist[]
   reviews      Review[]
   appointments Appointment[]

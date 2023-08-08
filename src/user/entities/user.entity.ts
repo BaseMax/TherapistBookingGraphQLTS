@@ -12,10 +12,9 @@ export class User {
   @Field(()=>String)
   lastName : string ; 
 
-  @Field(()=>String)
+  
   password : string ;
   
-  @Field(()=>String)
   email : string ;
 
   @Field(()=>[String])

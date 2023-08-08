@@ -8,33 +8,55 @@ type Therapist {
 }
 
 type User {
+  id: ID!
+  firstName: String!
+  lastName: String!
+  password: String!
+  email: String!
+  roles: [String!]!
+  therapists: [String!]!
+  reviews: [String!]!
+  appointments: [String!]!
+}
+
+type Auth {
   """Example field (placeholder)"""
   exampleField: Int!
 }
 
 type Query {
-  user(id: Int!): User!
-  therapist(id: Int!): Therapist!
+  findOneUser(id: ID!): User!
+  findAllUsers: [User!]!
+  findAllTherapist: [Therapist!]!
+  findOneTherapist(id: Int!): Therapist!
+  auth(id: Int!): Auth!
 }
 
 type Mutation {
   createUser(createUserInput: CreateUserInput!): User!
   updateUser(updateUserInput: UpdateUserInput!): User!
-  removeUser(id: Int!): User!
+  removeUser(id: ID!): User!
   createTherapist(createTherapistInput: CreateTherapistInput!): Therapist!
   updateTherapist(updateTherapistInput: UpdateTherapistInput!): Therapist!
   removeTherapist(id: Int!): Therapist!
+  createAuth(createAuthInput: CreateAuthInput!): Auth!
+  updateAuth(updateAuthInput: UpdateAuthInput!): Auth!
+  removeAuth(id: Int!): Auth!
 }
 
 input CreateUserInput {
-  """Example field (placeholder)"""
-  exampleField: Int!
+  firstName: String!
+  lastName: String!
+  password: String!
+  email: String!
 }
 
 input UpdateUserInput {
-  """Example field (placeholder)"""
-  exampleField: Int
-  id: Int!
+  firstName: String
+  lastName: String
+  password: String
+  email: String
+  id: ID!
 }
 
 input CreateTherapistInput {
@@ -43,6 +65,17 @@ input CreateTherapistInput {
 }
 
 input UpdateTherapistInput {
+  """Example field (placeholder)"""
+  exampleField: Int
+  id: Int!
+}
+
+input CreateAuthInput {
+  """Example field (placeholder)"""
+  exampleField: Int!
+}
+
+input UpdateAuthInput {
   """Example field (placeholder)"""
   exampleField: Int
   id: Int!

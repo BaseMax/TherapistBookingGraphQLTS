@@ -8,10 +8,31 @@ import { Role } from '@prisma/client';
 import { UseGuards } from '@nestjs/common';
 import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
 import { RoleGuard } from 'src/auth/guards/role.guard';
+import { GetUser } from 'src/common/decorator/get-user.decorator';
+import { StatusResult } from 'src/common/entity/status-result.entity';
 
 @Resolver(() => User)
 export class UserResolver {
   constructor(private readonly userService: UserService) {}
+
+  @UseGuards(JwtAuthGuard)
+  @Query(() => User, { name: 'me' })
+  getUser(@GetUser() user) {
+    return user ; 
+  }
+
+  @UseGuards(JwtAuthGuard)
+  @Mutation(() => StatusResult)
+  updateUser(@Args('updateUserInput') updateUserInput: UpdateUserInput) {
+    return this.userService.update(updateUserInput.id, updateUserInput);
+  }
+
+
+
+
+
+
+  // admin access 
 
   @HasRoles(Role.ADMIN)
   @UseGuards(JwtAuthGuard , RoleGuard)
@@ -34,11 +55,11 @@ export class UserResolver {
     return this.userService.create(createUserInput);
   }
 
-  @UseGuards(JwtAuthGuard)
-  @Mutation(() => User)
-  updateUser(@Args('updateUserInput') updateUserInput: UpdateUserInput) {
-    return this.userService.update(updateUserInput.id, updateUserInput);
-  }
 
-  
+  @HasRoles(Role.ADMIN)
+  @UseGuards(JwtAuthGuard , RoleGuard)
+  @Mutation(() => StatusResult)
+  removeUser(@Args('id') id : string) {
+    return this.userService.remove(id);
+  }
 }

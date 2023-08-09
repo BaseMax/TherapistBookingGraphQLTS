@@ -1,8 +1,11 @@
 import { CreateTherapistInput } from './create-therapist.input';
-import { InputType, Field, Int, PartialType } from '@nestjs/graphql';
+import { InputType, Field, Int, PartialType, ID } from '@nestjs/graphql';
 
 @InputType()
-export class UpdateTherapistInput extends PartialType(CreateTherapistInput) {
-  @Field(() => Int)
-  id: number;
+export class UpdateTherapistInput {
+  @Field(()=>String)
+  location : string ; 
+
+  @Field(()=>Boolean)
+  available : boolean ;
 }

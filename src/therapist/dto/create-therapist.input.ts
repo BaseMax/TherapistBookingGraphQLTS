@@ -1,7 +1,16 @@
-import { InputType, Int, Field } from '@nestjs/graphql';
+import { InputType, Int, Field, ID } from '@nestjs/graphql';
 
 @InputType()
 export class CreateTherapistInput {
-  @Field(() => Int, { description: 'Example field (placeholder)' })
-  exampleField: number;
+  @Field(()=>String)
+  userId : string ; 
+
+  @Field(()=>String)
+  firstName : string ; 
+
+  @Field(()=>String)
+  location : string ; 
+
+  @Field(()=>Boolean)
+  available : boolean ;
 }

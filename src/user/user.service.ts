@@ -10,7 +10,8 @@ import { PrismaService } from 'src/prisma/prisma.service';
 import { CreateUserInput } from './dto/create-user.input';
 import { UpdateUserInput } from './dto/update-user.input';
 import * as bcrypt from 'bcrypt';
-import { LoginInput } from 'src/auth/dto/login.input';
+import { StatusResult } from 'src/common/entity/status-result.entity';
+
 
 @Injectable()
 export class UserService {
@@ -24,6 +25,7 @@ export class UserService {
       lastName , 
       password ,
       email ,
+      roles , 
     } = createUserInput ;
     let user:User ; 
     
@@ -43,10 +45,11 @@ export class UserService {
           lastName , 
           email , 
           password , 
+          roles ,
         }
       })
     } catch (error) {
-      throw new InternalServerErrorException(error.message) ;
+      throw new BadRequestException(error.message) ;
     }
     
     return user ; 
@@ -66,28 +69,17 @@ export class UserService {
     return user ;
   }
 
-  async findByLogin(loginInput:LoginInput):Promise<User>{
-    const { 
-      email , 
-      password ,
-    } = loginInput ;
-    
-    const user = await this.prisma.user.findUnique({where : {email}});
+  async changeRole(roles:Role[] , user:User):Promise<StatusResult>{
+    await this.findOne({id : user.id}) , 
+    await this.prisma.user.update({where : {id : user.id} , data : {roles}})
 
-    if(!user){
-      throw new BadRequestException('The email is invalid')
-    }
-
-    const comparePassword = await bcrypt.compare(password , user.password) ;
-
-    if(!comparePassword){
-      throw new BadRequestException('The password is invalid')
-    }
-
-    return user ; 
+    return {
+      message : 'item edited successfully' , 
+      success : true ,
+    } 
   }
 
-  async update(id: string , updateUserInput: UpdateUserInput):Promise<boolean>{
+  async update(id: string , updateUserInput: UpdateUserInput):Promise<StatusResult>{
     const {
       firstName , 
       lastName , 
@@ -110,11 +102,18 @@ export class UserService {
       throw new HttpException(error.message , error.status); 
     }
 
-    return true ; 
+    return {
+      message : 'item edited successfully' , 
+      success : true ,
+    } 
   }
 
-  async remove(id: string):Promise<boolean>{
+  async remove(id: string):Promise<StatusResult>{
     await this.prisma.user.delete({where :{id}})
-    return true 
+    
+    return {
+      message : 'item removed successfully' , 
+      success : true ,
+    }
   }
 }

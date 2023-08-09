@@ -1,7 +1,7 @@
 import { BadRequestException, Injectable, UnauthorizedException } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { Role, User } from '@prisma/client';
-import { hash, hashSync } from 'bcrypt';
+import { compare, hash, hashSync } from 'bcrypt';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { UserService } from 'src/user/user.service';
 import { LoginInput } from './dto/login.input';
@@ -23,7 +23,8 @@ export class AuthService {
 
   async register(registerInput:RegisterInput):Promise<Auth>{
     let user:User ; 
-
+    let genRole:Role[] = [Role.ADMIN];
+    
     const userExist = await this.prisma.user.findUnique({where : {email : registerInput.email}});
 
     if(userExist){
@@ -32,10 +33,16 @@ export class AuthService {
 
     const hashedPassword = hashSync(registerInput.password , 12)
     
+    const userCount = await this.prisma.user.count();
+    
+    if(userCount === 0){
+      genRole.push(Role.ADMIN)
+    }
+
     user = await this.prisma.user.create({
       data : {
         ...registerInput , 
-        roles : [Role.USER] ,
+        roles :  genRole,
         password : hashedPassword ,
       }
     });
@@ -52,7 +59,22 @@ export class AuthService {
   }
 
   async login(loginInput:LoginInput):Promise<Auth>{
-    const user = await this.userService.findByLogin(loginInput);
+    const { 
+      email , 
+      password ,
+    } = loginInput ;
+    
+    const user = await this.prisma.user.findUnique({where : {email}});
+
+    if(!user){
+      throw new BadRequestException('The email is invalid')
+    }
+
+    const comparePassword = await compare(password , user.password) ;
+
+    if(!comparePassword){
+      throw new BadRequestException('The password is invalid')
+    }
 
     const payload:JwtPayload = {
       sub : user.id , 

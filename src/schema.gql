@@ -2,11 +2,6 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
-type Therapist {
-  """Example field (placeholder)"""
-  exampleField: Int!
-}
-
 type User {
   id: ID!
   firstName: String!
@@ -17,34 +12,73 @@ type User {
   appointments: [String!]!
 }
 
+type Review {
+  id: String!
+  therapistId: String!
+  userId: String!
+  rating: Int!
+  comment: String!
+  user: User!
+  therapist: Therapist!
+}
+
+type Therapist {
+  id: ID!
+  firstName: String!
+  location: String!
+  available: Boolean!
+  user: User!
+  reviews: [Review!]!
+}
+
+type StatusResult {
+  message: String!
+  success: Boolean!
+  id: String
+}
+
 type Auth {
   access_token: String!
   roles: [String!]!
 }
 
+type Appointment {
+  """Example field (placeholder)"""
+  exampleField: Int!
+}
+
 type Query {
+  me: User!
   findOneUser(id: ID!): User!
   findAllUsers: [User!]!
+  getTherapist: Therapist!
   findAllTherapist: [Therapist!]!
-  findOneTherapist(id: Int!): Therapist!
+  findOneTherapist(id: ID!): Therapist!
+  findTherapistAvailability: [Therapist!]!
+  getTherapistCount: StatusResult!
+  findTherapistsBySpecialty(specialty: String!): [StatusResult!]!
+  findTherapistByLocation(location: String!): [StatusResult!]!
+  findAllReview: [Review!]!
+  findReviewByTherapist(therapistId: String!): [Review!]!
+  findOneReview(id: ID!): Review!
+  appointment(id: Int!): Appointment!
 }
 
 type Mutation {
+  updateUser(updateUserInput: UpdateUserInput!): StatusResult!
   createUser(createUserInput: CreateUserInput!): User!
-  updateUser(updateUserInput: UpdateUserInput!): User!
+  removeUser(id: String!): StatusResult!
+  updateTherapist(updateTherapistInput: UpdateTherapistInput!): StatusResult!
   createTherapist(createTherapistInput: CreateTherapistInput!): Therapist!
-  updateTherapist(updateTherapistInput: UpdateTherapistInput!): Therapist!
-  removeTherapist(id: Int!): Therapist!
+  removeTherapist(id: String!): StatusResult!
   register(registerInput: RegisterInput!): Auth!
   login(loginInput: LoginInput!): Auth!
-}
-
-input CreateUserInput {
-  firstName: String!
-  lastName: String!
-  password: String!
-  email: String!
-  roles: [String!]!
+  createReview(createReviewInput: CreateReviewInput!): Review!
+  updateReview(updateReviewInput: UpdateReviewInput!): StatusResult!
+  removeReview(id: String!): StatusResult!
+  createAppointment(createAppointmentInput: CreateAppointmentInput!): Appointment!
+  updateAppointment(updateAppointmentInput: UpdateAppointmentInput!): Appointment!
+  removeAppointment(id: Int!): Appointment!
 }
 
 input UpdateUserInput {
@@ -56,15 +90,24 @@ input UpdateUserInput {
   id: ID!
 }
 
-input CreateTherapistInput {
-  """Example field (placeholder)"""
-  exampleField: Int!
+input CreateUserInput {
+  firstName: String!
+  lastName: String!
+  password: String!
+  email: String!
+  roles: [String!]!
 }
 
 input UpdateTherapistInput {
-  """Example field (placeholder)"""
-  exampleField: Int
-  id: Int!
+  location: String!
+  available: Boolean!
+}
+
+input CreateTherapistInput {
+  userId: String!
+  firstName: String!
+  location: String!
+  available: Boolean!
 }
 
 input RegisterInput {
@@ -77,4 +120,30 @@ input RegisterInput {
 input LoginInput {
   password: String!
   email: String!
+}
+
+input CreateReviewInput {
+  therapistId: String!
+  userId: String!
+  rating: Int!
+  comment: String!
+}
+
+input UpdateReviewInput {
+  therapistId: String
+  userId: String
+  rating: Int
+  comment: String
+  id: ID!
+}
+
+input CreateAppointmentInput {
+  """Example field (placeholder)"""
+  exampleField: Int!
+}
+
+input UpdateAppointmentInput {
+  """Example field (placeholder)"""
+  exampleField: Int
+  id: Int!
 }

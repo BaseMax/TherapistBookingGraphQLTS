@@ -10,6 +10,8 @@ import { UserModule } from './user/user.module';
 import { AuthModule } from './auth/auth.module';
 import { GraphQLError } from 'graphql';
 import { JwtModule, JwtModuleAsyncOptions } from '@nestjs/jwt';
+import { ReviewModule } from './review/review.module';
+import { AppointmentModule } from './appointment/appointment.module';
 
 
 @Module({
@@ -25,7 +27,9 @@ import { JwtModule, JwtModuleAsyncOptions } from '@nestjs/jwt';
     PrismaModule,
     UserModule,
     TherapistModule,
-    AuthModule ,
+    AuthModule,
+    ReviewModule,
+    AppointmentModule ,
   ],
 })
 export class AppModule {}

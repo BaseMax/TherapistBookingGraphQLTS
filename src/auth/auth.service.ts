@@ -23,7 +23,7 @@ export class AuthService {
 
   async register(registerInput:RegisterInput):Promise<Auth>{
     let user:User ; 
-    let genRole:Role[] = [Role.ADMIN];
+    let genRole:Role[] = [Role.USER];
     
     const userExist = await this.prisma.user.findUnique({where : {email : registerInput.email}});
 

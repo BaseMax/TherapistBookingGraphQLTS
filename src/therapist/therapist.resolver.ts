@@ -16,7 +16,8 @@ export class TherapistResolver {
   constructor(private readonly therapistService: TherapistService) {}
 
 
-  @UseGuards(JwtAuthGuard)
+  @HasRoles(Role.THERAPIST)
+  @UseGuards(JwtAuthGuard , RoleGuard)
   @Query(() => Therapist, { name: 'getTherapist' })
   getTherapist(@GetUser() user) {
     return this.therapistService.getTherapist(user.id);
@@ -41,20 +42,20 @@ export class TherapistResolver {
   }
 
   @UseGuards(JwtAuthGuard)
-  @Query(() => StatusResult , { name: 'getTherapistCount' })
+  @Query(() => [Therapist] , { name: 'getTherapistCount' })
   getTherapistCount() {
     return this.therapistService.getTherapistCount();
   }
 
 
   @UseGuards(JwtAuthGuard)
-  @Query(() => [StatusResult] , { name: 'findTherapistsBySpecialty' })
+  @Query(() => [Therapist] , { name: 'findTherapistsBySpecialty' })
   findTherapistsBySpecialty(@Args('specialty') specialty:string) {
     return this.therapistService.findTherapistsBySpecialty(specialty);
   }
 
   @UseGuards(JwtAuthGuard)
-  @Query(() => [StatusResult] , { name: 'findTherapistByLocation' })
+  @Query(() => [Therapist] , { name: 'findTherapistByLocation' })
   findTherapistByLocation(@Args('location') location:string) {
     return this.therapistService.findTherapistByLocation(location);
   }

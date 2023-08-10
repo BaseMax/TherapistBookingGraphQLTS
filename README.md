@@ -14,39 +14,39 @@ This repository contains a Therapist Booking Project built using GraphQL and Typ
 ## Demo 
 
 Register users
-[! Demo](./screenshots/register.png)
+![Demo](./screenshots/register.png)
 
 Login users
-[! Demo](./screenshots/login.png)
+![Demo](./screenshots/login.png)
 
 
 Create review (Auth required)
-[! Demo](./screenshots/createReview.png)
+![Demo](./screenshots/createReview.png)
 
 Find all review
-[! Demo](./screenshots/findAllReview.png)
+![Demo](./screenshots/findAllReview.png)
 
 User details
-[! Demo](./screenshots/me.png)
+![Demo](./screenshots/me.png)
 
 Find all users (Admin role required)
-[! Demo](./screenshots/findAllUsers.png)
+![Demo](./screenshots/findAllUsers.png)
 
 Create therapist by admin (Admin role required)
-[! Demo](./screenshots/register.png)
+![Demo](./screenshots/register.png)
 
 Therapist count 
-[! Demo](./screenshots/therapistCount.png)
+![Demo](./screenshots/therapistCount.png)
 
 Find therapist by location
-[! Demo](./screenshots/findTherapistByLocation.png.png)
+![Demo](./screenshots/findTherapistByLocation.png.png)
 
 Get all therapist appoinemnt (therapist role required)
-[! Demo](./screenshots/findTherapistAppoinment.png)
+![Demo](./screenshots/findTherapistAppoinment.png)
 
 
 Change Appoinemnt status by therapist
-[! Demo](./screenshots/TherapistchangeStatus.png)
+![Demo](./screenshots/TherapistchangeStatus.png)
 
 
 ## Getting Started

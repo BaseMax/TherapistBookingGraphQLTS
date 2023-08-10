@@ -28,11 +28,10 @@ export class AuthService {
     const userExist = await this.prisma.user.findUnique({where : {email : registerInput.email}});
 
     if(userExist){
-      throw new BadRequestException('user alredy exist');
+      throw new BadRequestException('User alredy exist');
     }
 
     const hashedPassword = hashSync(registerInput.password , 12)
-    
     const userCount = await this.prisma.user.count();
     
     if(userCount === 0){
@@ -88,7 +87,7 @@ export class AuthService {
   }
 
   async validateUser({ sub } : JwtPayload){
-    const user = await this.userService.findOne({id : sub});
+    const user = await this.prisma.user.findUnique({where : {id : sub}});
 
     if(!user){
       throw new UnauthorizedException('Invalid token')

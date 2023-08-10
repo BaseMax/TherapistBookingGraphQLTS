@@ -1,5 +1,5 @@
 import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
-import { Prisma, Role, Specialty, Therapist, User } from '@prisma/client';
+import { Prisma, Role, Therapist } from '@prisma/client';
 import { StatusResult } from 'src/common/entity/status-result.entity';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { UserService } from 'src/user/user.service';
@@ -21,7 +21,7 @@ export class TherapistService {
     const therapistExist = await this.prisma.therapist.findFirst({where : {user : {id : createTherapistInput.userId}}});
 
     if(therapistExist){
-      throw new BadRequestException('therapist alredy exist');
+      throw new BadRequestException('Therapist alredy exist');
     }
 
     const foundUser = await this.userService.findOne({id : createTherapistInput.userId});
@@ -45,9 +45,12 @@ export class TherapistService {
     return await this.prisma.therapist.findMany({
       include : {
         user : true , 
-        reviews : true , 
+        reviews : {
+          include : {
+            user : true 
+          }
+        } , 
         appointments : true , 
-        specialties : true , 
       }
     })
   }
@@ -58,30 +61,26 @@ export class TherapistService {
       where , 
       include : {
         user : true , 
-        reviews : true , 
+        reviews : {
+          include : {
+            user : true 
+          }
+        } , 
         appointments : true , 
-        specialties : true , 
       }
     })
   }
 
-  async findTherapistByLocation(location : string):Promise<Therapist>{
-    return await this.findOne({location}) ;
+  async findTherapistByLocation(location : string):Promise<Therapist[]>{
+    return await this.findAllWhere({location}) ;
   }
 
   async findTherapistAvailability():Promise<Therapist[]>{
     return await this.findAllWhere({available : true})
   }
 
-  async findTherapistsBySpecialty(specialty:string):Promise<Specialty[]>{
-    return await this.prisma.specialty.findMany({
-      where : {
-        name : specialty ,
-      } ,
-      include : {
-        therapist : true , 
-      }
-    })
+  async findTherapistsBySpecialty(specialty:string):Promise<Therapist[]>{
+    return await this.findAllWhere({specialty})
   }
 
   async getTherapistCount():Promise<StatusResult>{
@@ -101,19 +100,14 @@ export class TherapistService {
           select : {
             comment : true , 
             rating : true , 
-            user : {
-              select : {
-                firstName : true , 
-                lastName : true,
-              }
-            }
+            user : true ,
           }
         }
       }
     })
 
     if(!therapist){
-      throw new NotFoundException('therapist not found');
+      throw new NotFoundException('Therapist not found');
     }
 
     return therapist ; 
@@ -124,7 +118,7 @@ export class TherapistService {
     const result = await this.prisma.therapist.update({where : {id : therapist.id} , data : {...updateTherapistInput}});
 
     return {
-      message : 'item edited successfully' , 
+      message : 'Item edited successfully' , 
       success : true ,
     } ; 
   }
@@ -135,7 +129,7 @@ export class TherapistService {
   
 
     return {
-      message : 'item removed successfully' , 
+      message : 'Item removed successfully' , 
       success : true ,
     }
   }

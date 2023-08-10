@@ -32,7 +32,7 @@ export class UserService {
     const emailInDb = await this.prisma.user.findUnique({where : {email}})
 
     if(emailInDb){
-      throw new BadRequestException('user alerdy registerd')
+      throw new BadRequestException('User alerdy registerd')
     }
 
     try {
@@ -63,7 +63,7 @@ export class UserService {
     const user =  await this.prisma.user.findFirst({where});
     
     if(!user){
-      throw new NotFoundException('user does not exist')
+      throw new NotFoundException('User does not exist')
     }
     
     return user ;
@@ -74,7 +74,7 @@ export class UserService {
     await this.prisma.user.update({where : {id : user.id} , data : {roles}})
 
     return {
-      message : 'item edited successfully' , 
+      message : 'Item edited successfully' , 
       success : true ,
     } 
   }
@@ -103,7 +103,7 @@ export class UserService {
     }
 
     return {
-      message : 'item edited successfully' , 
+      message : 'Item edited successfully' , 
       success : true ,
     } 
   }
@@ -112,7 +112,7 @@ export class UserService {
     await this.prisma.user.delete({where :{id}})
     
     return {
-      message : 'item removed successfully' , 
+      message : 'Item removed successfully' , 
       success : true ,
     }
   }

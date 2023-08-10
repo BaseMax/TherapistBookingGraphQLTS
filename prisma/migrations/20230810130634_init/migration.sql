@@ -23,17 +23,9 @@ CREATE TABLE "Therapist" (
     "location" TEXT NOT NULL,
     "available" BOOLEAN NOT NULL,
     "userId" TEXT NOT NULL,
+    "specialty" TEXT NOT NULL,
 
     CONSTRAINT "Therapist_pkey" PRIMARY KEY ("id")
-);
-
--- CreateTable
-CREATE TABLE "Specialty" (
-    "id" TEXT NOT NULL,
-    "name" TEXT NOT NULL,
-    "therapistId" TEXT NOT NULL,
-
-    CONSTRAINT "Specialty_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
@@ -51,7 +43,7 @@ CREATE TABLE "Review" (
 CREATE TABLE "Appointment" (
     "id" TEXT NOT NULL,
     "available" BOOLEAN NOT NULL,
-    "status" "AppointmentStatus"[],
+    "status" "AppointmentStatus" NOT NULL,
     "startTime" TIMESTAMP(3) NOT NULL,
     "endTime" TIMESTAMP(3) NOT NULL,
     "userId" TEXT NOT NULL,
@@ -65,9 +57,6 @@ CREATE UNIQUE INDEX "User_email_key" ON "User"("email");
 
 -- AddForeignKey
 ALTER TABLE "Therapist" ADD CONSTRAINT "Therapist_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "Specialty" ADD CONSTRAINT "Specialty_therapistId_fkey" FOREIGN KEY ("therapistId") REFERENCES "Therapist"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "Review" ADD CONSTRAINT "Review_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;

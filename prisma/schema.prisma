@@ -31,15 +31,9 @@ model Therapist {
   userId        String 
   reviews       Review[]
   appointments  Appointment[]
-  specialties   Specialty[]
+  specialty  String
 }
 
-model Specialty {
-  id          String     @id @default(uuid())
-  name        String
-  therapistId String 
-  therapist   Therapist @relation(fields: [therapistId], references: [id])
-}
 
 model Review {
   id          String     @id @default(uuid())
@@ -55,7 +49,7 @@ model Review {
 model Appointment {
   id          String      @id @default(uuid())
   available   Boolean
-  status      AppointmentStatus[]
+  status      AppointmentStatus
   startTime   DateTime
   endTime     DateTime
   user        User     @relation(fields: [userId], references: [id])

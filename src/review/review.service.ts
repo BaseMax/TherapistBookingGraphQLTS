@@ -74,7 +74,7 @@ export class ReviewService {
     });
 
     return {
-      message : 'item edited successfully' , 
+      message : 'Item edited successfully' , 
       success : true , 
     }
   }
@@ -91,7 +91,7 @@ export class ReviewService {
     });
 
     return {
-      message : 'item removed successfully' , 
+      message : 'Item removed successfully' , 
       success : true , 
     }
   }

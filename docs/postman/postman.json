@@ -1,0 +1,719 @@
+{
+	"info": {
+		"_postman_id": "f2529d9f-0c43-4f41-92a9-b71f0cb986ba",
+		"name": "Postman Collection (from GraphQL)",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "16572967"
+	},
+	"item": [
+		{
+			"name": "mutations",
+			"item": [
+				{
+					"name": "updateUser",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "mutation updateUser ($updateUserInput: UpdateUserInput!) {\n    updateUser (updateUserInput: $updateUserInput) {\n        message\n        success\n        id\n    }\n}",
+								"variables": "{\n  \"updateUserInput\": {\n    \"firstName\": \"\",\n    \"lastName\": \"\",\n    \"password\": \"\",\n    \"email\": \"\",\n    \"roles\": [\n      \"\"\n    ],\n    \"id\": 0\n  }\n}"
+							}
+						},
+						"url": {
+							"raw": "{{url}}",
+							"host": [
+								"{{url}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "createUser",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "mutation createUser ($createUserInput: CreateUserInput!) {\n    createUser (createUserInput: $createUserInput) {\n        id\n        firstName\n        lastName\n        roles\n        therapists\n        reviews\n        appointments\n    }\n}",
+								"variables": "{\n  \"createUserInput\": {\n    \"firstName\": \"\",\n    \"lastName\": \"\",\n    \"password\": \"\",\n    \"email\": \"\",\n    \"roles\": [\n      \"\"\n    ]\n  }\n}"
+							}
+						},
+						"url": {
+							"raw": "{{url}}",
+							"host": [
+								"{{url}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "removeUser",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "mutation removeUser ($id: String!) {\n    removeUser (id: $id) {\n        message\n        success\n        id\n    }\n}",
+								"variables": "{\n  \"id\": \"\"\n}"
+							}
+						},
+						"url": {
+							"raw": "{{url}}",
+							"host": [
+								"{{url}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateTherapist",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "mutation updateTherapist ($updateTherapistInput: UpdateTherapistInput!) {\n    updateTherapist (updateTherapistInput: $updateTherapistInput) {\n        message\n        success\n        id\n    }\n}",
+								"variables": "{\n  \"updateTherapistInput\": {\n    \"location\": \"\",\n    \"available\": true\n  }\n}"
+							}
+						},
+						"url": {
+							"raw": "{{url}}",
+							"host": [
+								"{{url}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "createTherapist",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "mutation createTherapist ($createTherapistInput: CreateTherapistInput!) {\n    createTherapist (createTherapistInput: $createTherapistInput) {\n        id\n        firstName\n        location\n        available\n        specialty\n    }\n}",
+								"variables": "{\n  \"createTherapistInput\": {\n    \"userId\": \"\",\n    \"firstName\": \"\",\n    \"location\": \"\",\n    \"available\": true,\n    \"specialty\": \"\"\n  }\n}"
+							}
+						},
+						"url": {
+							"raw": "{{url}}",
+							"host": [
+								"{{url}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "removeTherapist",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "mutation removeTherapist ($id: String!) {\n    removeTherapist (id: $id) {\n        message\n        success\n        id\n    }\n}",
+								"variables": "{\n  \"id\": \"\"\n}"
+							}
+						},
+						"url": {
+							"raw": "{{url}}",
+							"host": [
+								"{{url}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "mutation register ($registerInput: RegisterInput!) {\n    register (registerInput: $registerInput) {\n        access_token\n        roles\n    }\n}",
+								"variables": "{\n  \"registerInput\": {\n    \"firstName\": \"\",\n    \"lastName\": \"\",\n    \"password\": \"\",\n    \"email\": \"\"\n  }\n}"
+							}
+						},
+						"url": {
+							"raw": "{{url}}",
+							"host": [
+								"{{url}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "mutation login ($loginInput: LoginInput!) {\n    login (loginInput: $loginInput) {\n        access_token\n        roles\n    }\n}",
+								"variables": "{\n  \"loginInput\": {\n    \"password\": \"\",\n    \"email\": \"\"\n  }\n}"
+							}
+						},
+						"url": {
+							"raw": "{{url}}",
+							"host": [
+								"{{url}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "createReview",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "mutation createReview ($createReviewInput: CreateReviewInput!) {\n    createReview (createReviewInput: $createReviewInput) {\n        id\n        therapistId\n        userId\n        rating\n        comment\n    }\n}",
+								"variables": "{\n  \"createReviewInput\": {\n    \"therapistId\": \"\",\n    \"rating\": 0,\n    \"comment\": \"\"\n  }\n}"
+							}
+						},
+						"url": {
+							"raw": "{{url}}",
+							"host": [
+								"{{url}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateReview",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "mutation updateReview ($updateReviewInput: UpdateReviewInput!) {\n    updateReview (updateReviewInput: $updateReviewInput) {\n        message\n        success\n        id\n    }\n}",
+								"variables": "{\n  \"updateReviewInput\": {\n    \"therapistId\": \"\",\n    \"rating\": 0,\n    \"comment\": \"\",\n    \"id\": 0\n  }\n}"
+							}
+						},
+						"url": {
+							"raw": "{{url}}",
+							"host": [
+								"{{url}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "removeReview",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "mutation removeReview ($id: String!) {\n    removeReview (id: $id) {\n        message\n        success\n        id\n    }\n}",
+								"variables": "{\n  \"id\": \"\"\n}"
+							}
+						},
+						"url": {
+							"raw": "{{url}}",
+							"host": [
+								"{{url}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "createAppointment",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "mutation createAppointment ($createAppointmentInput: CreateAppointmentInput!) {\n    createAppointment (createAppointmentInput: $createAppointmentInput) {\n        message\n        success\n        id\n    }\n}",
+								"variables": "{\n  \"createAppointmentInput\": {\n    \"therapistId\": \"\",\n    \"available\": true,\n    \"startTime\": \"\",\n    \"endTime\": \"\"\n  }\n}"
+							}
+						},
+						"url": {
+							"raw": "{{url}}",
+							"host": [
+								"{{url}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateUserAppointment",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "mutation updateUserAppointment ($updateAppointmentInput: UpdateAppointmentInput!) {\n    updateUserAppointment (updateAppointmentInput: $updateAppointmentInput) {\n        id\n        available\n        status\n        startTime\n        endTime\n    }\n}",
+								"variables": "{\n  \"updateAppointmentInput\": {\n    \"therapistId\": \"\",\n    \"available\": true,\n    \"startTime\": \"\",\n    \"endTime\": \"\",\n    \"id\": \"\"\n  }\n}"
+							}
+						},
+						"url": {
+							"raw": "{{url}}",
+							"host": [
+								"{{url}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "removeAppointment",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "mutation removeAppointment ($id: ID!) {\n    removeAppointment (id: $id) {\n        id\n        available\n        status\n        startTime\n        endTime\n    }\n}",
+								"variables": "{\n  \"id\": 0\n}"
+							}
+						},
+						"url": {
+							"raw": "{{url}}",
+							"host": [
+								"{{url}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "changeTherapistAppoinmentStatus",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "mutation changeTherapistAppoinmentStatus ($id: ID!, $status: ID!) {\n    changeTherapistAppoinmentStatus (id: $id, status: $status) {\n        message\n        success\n        id\n    }\n}",
+								"variables": "{\n  \"id\": 0,\n  \"status\": 0\n}"
+							}
+						},
+						"url": {
+							"raw": "{{url}}",
+							"host": [
+								"{{url}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "queries",
+			"item": [
+				{
+					"name": "me",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "query me {\n    me {\n        id\n        firstName\n        lastName\n        roles\n        therapists\n        reviews\n        appointments\n    }\n}",
+								"variables": "{}"
+							}
+						},
+						"url": {
+							"raw": "{{url}}",
+							"host": [
+								"{{url}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "findOneUser",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "query findOneUser ($id: ID!) {\n    findOneUser (id: $id) {\n        id\n        firstName\n        lastName\n        roles\n        therapists\n        reviews\n        appointments\n    }\n}",
+								"variables": "{\n  \"id\": 0\n}"
+							}
+						},
+						"url": {
+							"raw": "{{url}}",
+							"host": [
+								"{{url}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "findAllUsers",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "query findAllUsers {\n    findAllUsers {\n        id\n        firstName\n        lastName\n        roles\n        therapists\n        reviews\n        appointments\n    }\n}",
+								"variables": "{}"
+							}
+						},
+						"url": {
+							"raw": "{{url}}",
+							"host": [
+								"{{url}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getTherapist",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "query getTherapist {\n    getTherapist {\n        id\n        firstName\n        location\n        available\n        specialty\n    }\n}",
+								"variables": "{}"
+							}
+						},
+						"url": {
+							"raw": "{{url}}",
+							"host": [
+								"{{url}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "findAllTherapist",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "query findAllTherapist {\n    findAllTherapist {\n        id\n        firstName\n        location\n        available\n        specialty\n    }\n}",
+								"variables": "{}"
+							}
+						},
+						"url": {
+							"raw": "{{url}}",
+							"host": [
+								"{{url}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "findOneTherapist",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "query findOneTherapist ($id: ID!) {\n    findOneTherapist (id: $id) {\n        id\n        firstName\n        location\n        available\n        specialty\n    }\n}",
+								"variables": "{\n  \"id\": 0\n}"
+							}
+						},
+						"url": {
+							"raw": "{{url}}",
+							"host": [
+								"{{url}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "findTherapistAvailability",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "query findTherapistAvailability {\n    findTherapistAvailability {\n        id\n        firstName\n        location\n        available\n        specialty\n    }\n}",
+								"variables": "{}"
+							}
+						},
+						"url": {
+							"raw": "{{url}}",
+							"host": [
+								"{{url}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getTherapistCount",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "query getTherapistCount {\n    getTherapistCount {\n        id\n        firstName\n        location\n        available\n        specialty\n    }\n}",
+								"variables": "{}"
+							}
+						},
+						"url": {
+							"raw": "{{url}}",
+							"host": [
+								"{{url}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "findTherapistsBySpecialty",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "query findTherapistsBySpecialty ($specialty: String!) {\n    findTherapistsBySpecialty (specialty: $specialty) {\n        id\n        firstName\n        location\n        available\n        specialty\n    }\n}",
+								"variables": "{\n  \"specialty\": \"\"\n}"
+							}
+						},
+						"url": {
+							"raw": "{{url}}",
+							"host": [
+								"{{url}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "findTherapistByLocation",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "query findTherapistByLocation ($location: String!) {\n    findTherapistByLocation (location: $location) {\n        id\n        firstName\n        location\n        available\n        specialty\n    }\n}",
+								"variables": "{\n  \"location\": \"\"\n}"
+							}
+						},
+						"url": {
+							"raw": "{{url}}",
+							"host": [
+								"{{url}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "findAllReview",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "query findAllReview {\n    findAllReview {\n        id\n        therapistId\n        userId\n        rating\n        comment\n    }\n}",
+								"variables": "{}"
+							}
+						},
+						"url": {
+							"raw": "{{url}}",
+							"host": [
+								"{{url}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "findReviewByTherapist",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "query findReviewByTherapist ($therapistId: String!) {\n    findReviewByTherapist (therapistId: $therapistId) {\n        id\n        therapistId\n        userId\n        rating\n        comment\n    }\n}",
+								"variables": "{\n  \"therapistId\": \"\"\n}"
+							}
+						},
+						"url": {
+							"raw": "{{url}}",
+							"host": [
+								"{{url}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "findOneReview",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "query findOneReview ($id: ID!) {\n    findOneReview (id: $id) {\n        id\n        therapistId\n        userId\n        rating\n        comment\n    }\n}",
+								"variables": "{\n  \"id\": 0\n}"
+							}
+						},
+						"url": {
+							"raw": "{{url}}",
+							"host": [
+								"{{url}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "findUserAppointmentAll",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "query findUserAppointmentAll {\n    findUserAppointmentAll {\n        id\n        available\n        status\n        startTime\n        endTime\n    }\n}",
+								"variables": "{}"
+							}
+						},
+						"url": {
+							"raw": "{{url}}",
+							"host": [
+								"{{url}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "findUserAppointmentOne",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "query findUserAppointmentOne ($id: ID!) {\n    findUserAppointmentOne (id: $id) {\n        id\n        available\n        status\n        startTime\n        endTime\n    }\n}",
+								"variables": "{\n  \"id\": 0\n}"
+							}
+						},
+						"url": {
+							"raw": "{{url}}",
+							"host": [
+								"{{url}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "findTherapistAppoinmentAll",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "query findTherapistAppoinmentAll {\n    findTherapistAppoinmentAll {\n        id\n        available\n        status\n        startTime\n        endTime\n    }\n}",
+								"variables": "{}"
+							}
+						},
+						"url": {
+							"raw": "{{url}}",
+							"host": [
+								"{{url}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "findTherapistAppoinmentOne",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "query findTherapistAppoinmentOne ($id: ID!) {\n    findTherapistAppoinmentOne (id: $id) {\n        id\n        available\n        status\n        startTime\n        endTime\n    }\n}",
+								"variables": "{\n  \"id\": 0\n}"
+							}
+						},
+						"url": {
+							"raw": "{{url}}",
+							"host": [
+								"{{url}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "url",
+			"value": "http://localhost:3000/graphql/",
+			"type": "any"
+		}
+	]
+}

@@ -22,13 +22,25 @@ type Review {
   therapist: Therapist!
 }
 
+type Appointment {
+  id: ID!
+  available: Boolean!
+  status: String!
+  startTime: String!
+  endTime: String!
+  user: User!
+  therapist: Therapist!
+}
+
 type Therapist {
   id: ID!
   firstName: String!
   location: String!
   available: Boolean!
   user: User!
+  specialty: String!
   reviews: [Review!]!
+  appointments: Appointment!
 }
 
 type StatusResult {
@@ -42,11 +54,6 @@ type Auth {
   roles: [String!]!
 }
 
-type Appointment {
-  """Example field (placeholder)"""
-  exampleField: Int!
-}
-
 type Query {
   me: User!
   findOneUser(id: ID!): User!
@@ -55,13 +62,16 @@ type Query {
   findAllTherapist: [Therapist!]!
   findOneTherapist(id: ID!): Therapist!
   findTherapistAvailability: [Therapist!]!
-  getTherapistCount: StatusResult!
-  findTherapistsBySpecialty(specialty: String!): [StatusResult!]!
-  findTherapistByLocation(location: String!): [StatusResult!]!
+  getTherapistCount: [Therapist!]!
+  findTherapistsBySpecialty(specialty: String!): [Therapist!]!
+  findTherapistByLocation(location: String!): [Therapist!]!
   findAllReview: [Review!]!
   findReviewByTherapist(therapistId: String!): [Review!]!
   findOneReview(id: ID!): Review!
-  appointment(id: Int!): Appointment!
+  findUserAppointmentAll: [Appointment!]!
+  findUserAppointmentOne(id: ID!): Appointment!
+  findTherapistAppoinmentAll: [Appointment!]!
+  findTherapistAppoinmentOne(id: ID!): Appointment!
 }
 
 type Mutation {
@@ -76,9 +86,10 @@ type Mutation {
   createReview(createReviewInput: CreateReviewInput!): Review!
   updateReview(updateReviewInput: UpdateReviewInput!): StatusResult!
   removeReview(id: String!): StatusResult!
-  createAppointment(createAppointmentInput: CreateAppointmentInput!): Appointment!
-  updateAppointment(updateAppointmentInput: UpdateAppointmentInput!): Appointment!
-  removeAppointment(id: Int!): Appointment!
+  createAppointment(createAppointmentInput: CreateAppointmentInput!): StatusResult!
+  updateUserAppointment(updateAppointmentInput: UpdateAppointmentInput!): Appointment!
+  removeAppointment(id: ID!): Appointment!
+  changeTherapistAppoinmentStatus(id: ID!, status: ID!): StatusResult!
 }
 
 input UpdateUserInput {
@@ -108,6 +119,7 @@ input CreateTherapistInput {
   firstName: String!
   location: String!
   available: Boolean!
+  specialty: String!
 }
 
 input RegisterInput {
@@ -124,26 +136,33 @@ input LoginInput {
 
 input CreateReviewInput {
   therapistId: String!
-  userId: String!
   rating: Int!
   comment: String!
 }
 
 input UpdateReviewInput {
   therapistId: String
-  userId: String
   rating: Int
   comment: String
   id: ID!
 }
 
 input CreateAppointmentInput {
-  """Example field (placeholder)"""
-  exampleField: Int!
+  therapistId: String!
+  available: Boolean!
+  startTime: DateTime!
+  endTime: DateTime!
 }
 
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
 input UpdateAppointmentInput {
-  """Example field (placeholder)"""
-  exampleField: Int
-  id: Int!
+  therapistId: String
+  available: Boolean
+  startTime: DateTime
+  endTime: DateTime
+  id: String!
 }

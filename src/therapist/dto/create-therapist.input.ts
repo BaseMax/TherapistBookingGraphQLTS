@@ -13,4 +13,7 @@ export class CreateTherapistInput {
 
   @Field(()=>Boolean)
   available : boolean ;
+
+  @Field(()=>String)
+  specialty : string ;
 }

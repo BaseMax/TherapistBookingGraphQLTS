@@ -85,19 +85,22 @@ Or using yarn:
 yarn install
 ```
 
+## Init Prisma : 
+
+```
+npx prisma migrate dev --name init 
+
+```
+
+
 **Configuration**
 
 Create a `.env` file in the root directory and add the following environment variables:
-```env
-# Set the desired port for the server
-PORT=3000
-
-# Configure the database connection
-DB_HOST=your_database_host
-DB_USER=your_database_user
-DB_PASSWORD=your_database_password
-DB_NAME=your_database_name
 ```
+# Set enviornment variable :
+DATABASE_URL="postgresql://username:password@localhost:5432/your database?schema=public"
+```
+
 
 Configure any other necessary environment variables based on your specific setup.
 

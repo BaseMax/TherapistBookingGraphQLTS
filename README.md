@@ -98,7 +98,7 @@ npx prisma migrate dev --name init
 Create a `.env` file in the root directory and add the following environment variables:
 ```
 # Set enviornment variable :
-DATABASE_URL="postgresql://username:password@localhost:5432/your database?schema=public"
+DATABASE_URL="postgresql://username:password@localhost:5432/your-database?schema=public"
 ```
 
 
@@ -111,7 +111,7 @@ To start the development server, run the following command:
 Using npm:
 
 ```bash
-npm run dev
+npm run start:dev
 ```
 
 Or using yarn:

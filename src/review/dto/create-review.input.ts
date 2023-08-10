@@ -6,10 +6,6 @@ export class CreateReviewInput {
   @Field(()=>String)
   @IsNotEmpty()
   therapistId : string ;
-
-  @Field(()=>String)
-  @IsNotEmpty()
-  userId : string ; 
   
   @Field(()=>Int)
   @IsNotEmpty()

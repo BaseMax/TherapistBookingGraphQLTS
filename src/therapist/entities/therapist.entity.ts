@@ -1,7 +1,7 @@
 import { ObjectType, Field, ID } from '@nestjs/graphql';
-import { Appointment, Specialty } from '@prisma/client';
 import { User } from 'src/user/entities/user.entity';
 import { Review } from 'src/review/entities/review.entity';
+import { Appointment } from 'src/appointment/entities/appointment.entity';
 
 @ObjectType()
 export class Therapist {
@@ -20,12 +20,12 @@ export class Therapist {
   @Field(()=>User)
   user : User ;
 
-  // @Field()
-  // specialties : Specialty[]
+  @Field(()=>String)
+  specialty : string ;
 
   @Field(()=>[Review])
   reviews : Review[]
 
-  // @Field()
-  // appointments : Appointment[]
+  @Field(()=>Appointment)
+  appointments : Appointment[]
 }

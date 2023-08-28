@@ -10,7 +10,6 @@ This repository contains a Therapist Booking Project built using GraphQL and Typ
 - View upcoming and past appointments
 - Rate and review therapists based on their services
 
-
 ## Demo 
 
 Register users
@@ -20,7 +19,6 @@ Register users
 Login users
 
 ![Demo](./screenshots/login.png)
-
 
 Create review (Auth required)
 
@@ -54,11 +52,9 @@ Get all therapist appoinemnt (therapist role required)
 
 ![Demo](./screenshots/findTherapistAppoinment.png)
 
-
 Change Appoinemnt status by therapist
 
 ![Demo](./screenshots/TherapistchangeStatus.png)
-
 
 ## Getting Started
 
@@ -103,7 +99,6 @@ npx prisma migrate dev --name init
 
 ```
 
-
 **Configuration**
 
 Create a `.env` file in the root directory and add the following environment variables:
@@ -111,7 +106,6 @@ Create a `.env` file in the root directory and add the following environment var
 # Set enviornment variable :
 DATABASE_URL="postgresql://username:password@localhost:5432/your-database?schema=public"
 ```
-
 
 Configure any other necessary environment variables based on your specific setup.
 
